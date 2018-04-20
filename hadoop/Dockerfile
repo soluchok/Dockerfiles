@@ -53,6 +53,16 @@ RUN set -euxo pipefail && \
     yum clean all && \
     rm -rf /var/cache/yum
 
+RUN cd /tmp && \
+    curl http://www.scala-lang.org/files/archive/scala-2.11.8.tgz > scala-2.11.8.tgz && \
+    tar -xvf scala-2.11.8.tgz && \
+    cp /tmp/scala-2.11.8/lib/scala-compiler.jar /hadoop/share/hadoop/hdfs/lib && \
+    cp /tmp/scala-2.11.8/lib/scala-library.jar /hadoop/share/hadoop/hdfs/lib && \
+    curl -L http://search.maven.org/remotecontent?filepath=org/clapper/grizzled-slf4j_2.10/1.0.1/grizzled-slf4j_2.10-1.0.1.jar > /hadoop/share/hadoop/hdfs/lib/grizzled-slf4j_2.10-1.0.1.jar && \
+    curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-yarn_2.11/0.12.0/samza-yarn_2.11-0.12.0.jar > /hadoop/share/hadoop/hdfs/lib/samza-yarn_2.11-0.12.0.jar && \
+    curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-core_2.11/0.12.0/samza-core_2.11-0.12.0.jar > /hadoop/share/hadoop/hdfs/lib/samza-core_2.11-0.12.0.jar && \
+    cp /hadoop/share/hadoop/tools/lib/commons-httpclient-3.1.jar /hadoop/share/hadoop/common/lib/
+
 COPY entrypoint.sh /
 COPY conf/core-site.xml /hadoop/etc/hadoop/
 COPY conf/hdfs-site.xml /hadoop/etc/hadoop/

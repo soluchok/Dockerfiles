@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
-    <property>
-        <name>fs.defaultFS</name>
-        <value>hdfs://localhost:8020</value>
-    </property>
+   <property>
+      <name>fs.defaultFS</name>
+      <value>hdfs://hadoop:8020</value>
+   </property>
+   <property>
+      <name>fs.http.impl</name>
+      <value>org.apache.samza.util.hadoop.HttpFileSystem</value>
+   </property>
 </configuration>
